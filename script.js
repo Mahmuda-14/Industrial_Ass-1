@@ -53,18 +53,18 @@ calculateExpense();
  */
 
 function calculateBudget() {
+  const totalIncomeValue = parseFloat(totalIncome.innerHTML.replace(/,/g, ""));
+  const totalExpenseValue = parseFloat(totalExpense.innerHTML.replace(/,/g, ""));
 
-  
-  const income = parseFloat(totalIncome.innerText.replace(/,/g, ''));
-  const expense = parseFloat(totalExpense.innerText.replace(/,/g, ''));
+  const budget = totalIncomeValue - totalExpenseValue;
 
-  const budget = income - expense;
   totalBudget.innerHTML = formatMoney(budget);
 
-  // console.log("Total budget:", budget);
+  if (budget === 0) {
+    alert("Budget is 0");
+  }
 }
 
-calculateBudget();
 
 
 /**
@@ -84,6 +84,7 @@ function deleteEntry(event) {
     } else if (list === expenseList) {
       calculateExpense();
     }
+    calculateBudget();
   }
 }
 // Attach a single click event listener to the parent of both income and expense lists
@@ -164,7 +165,7 @@ if (type === "income") {
 } else {
   calculateExpense();
 }
-
+calculateBudget();
 
 }
 
